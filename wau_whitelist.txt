@@ -1,0 +1,17 @@
+7zip.7zip
+BelgianGovernment.Belgium-eIDmiddleware
+Mikrotik.Winbox
+SumatraPDF.SumatraPDF
+VideoLAN.VLC
+WiresharkFoundation.Wireshark
+qBittorrent.qBittorrent
+tailscale.tailscale
+7zip.7zip
+BelgianGovernment.Belgium-eIDmiddleware
+Mikrotik.Winbox
+SumatraPDF.SumatraPDF
+VideoLAN.VLC
+WiresharkFoundation.Wireshark
+qBittorrent.qBittorrent
+tailscale.tailscale
+Microsoft.VisualStudioCode
