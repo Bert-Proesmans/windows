@@ -21,6 +21,7 @@
     "OBSProject.OBSStudio"
     "Python.Python.3.8"
     "qBittorrent.qBittorrent"
+    "RamenSoftware.Windhawk"
     "Romanitho.WiGUI"
     "Rustlang.Rustup"
     "SumatraPDF.SumatraPDF"
