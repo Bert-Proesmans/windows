@@ -1,0 +1,28 @@
+/*
+ CONFIG;
+    - Locate user profile folder
+        - about:profiles -> open roaming folder
+        - C:\Users\Bert\AppData\Roaming\Mozilla\Firefox\Profiles\*
+    - Create folder 'chrome'
+    - Copy file userChrome.css into 'chrome' folder
+        - C:\Users\Bert\AppData\Roaming\Mozilla\Firefox\Profiles\*\chrome\userChrome.css
+    - Enable legacy user modifications
+        - about:config -> toolkit.legacyUserProfileCustomizations.stylesheets = true
+*/
+
+#tabbrowser-tabs {
+    visibility: collapse !important;
+    min-height: 0 !important;
+}
+
+tab{
+    display:none!important;
+}
+
+#main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar > .toolbar-items {
+    opacity: 0;
+    pointer-events: none;
+  }
+  #main-window:not([tabsintitlebar="true"]) #TabsToolbar {
+      visibility: collapse !important;
+  }
