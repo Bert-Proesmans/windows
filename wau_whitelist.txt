@@ -1,17 +1,31 @@
 7zip.7zip
+Almico.SpeedFan
+Audacity.Audacity
 BelgianGovernment.Belgium-eIDmiddleware
-Mikrotik.Winbox
-SumatraPDF.SumatraPDF
+BotProductions.IconViewer
+CodeSector.TeraCopy
+CPUID.CPU-Z
+CPUID.HWMonitor
+CrystalDewWorld.CrystalDiskInfo
+flux.flux # User install, breaks install from another user but works on update
+Fork.Fork # User install, breaks install from another user but works on update
+Google.GoogleDrive
+gurnec.HashCheckShellExtension
+Gyan.FFmpeg # User install, breaks install from another user but works on update
+IrfanSkiljan.IrfanView
+MHNexus.HxD
+Microsoft.OpenJDK.17
+Mikrotik.Winbox # User install, breaks install from another user but works on update
+Mozilla.Firefox
+OBSProject.OBSStudio
+Python.Python.3.8
+qBittorrent.qBittorrent
+RamenSoftware.Windhawk
+Rustlang.Rustup # User install, breaks install from another user but works on update
+SumatraPDF.SumatraPDF # User install, breaks install from another user but works on update
+tailscale.tailscale
+UderzoSoftware.SpaceSniffer
+Valve.Steam
 VideoLAN.VLC
 WiresharkFoundation.Wireshark
-qBittorrent.qBittorrent
-tailscale.tailscale
-7zip.7zip
-BelgianGovernment.Belgium-eIDmiddleware
-Mikrotik.Winbox
-SumatraPDF.SumatraPDF
-VideoLAN.VLC
-WiresharkFoundation.Wireshark
-qBittorrent.qBittorrent
-tailscale.tailscale
-Microsoft.VisualStudioCode
+Yubico.YubikeyManager
