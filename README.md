@@ -26,5 +26,5 @@ Manual steps.
 | Filename | Description |
 | --- | --- |
 | set_acl.ps1 | Update the value of variable `$User` and the target paths. The script will update the access records residing on a seperate disk/partition for the user post-install a new system.
-| winget_install.ps1 | Install software through winget to quickly get setup. The installers will elevate themselves. The script needs to run as the new user!
+| winget_install.ps1 | Install software through winget to quickly get setup. The installers will elevate themselves.<br/>The script needs to run as the current user, or as a separate administrator user with manual installs of the per-user programs (see script content).
 | wau_whitelist.txt | Whitelisted apps that automatically update through the WingetAutoAupdate tool.
