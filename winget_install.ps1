@@ -103,6 +103,7 @@ $data = @{
     "WAU_ListPath" = $programPath
     "WAU_UpdatesInterval" = "Daily"
     "WAU_StartMenuShortcut" = 1
+    "WAU_DesktopShortcut" = 0
 }
 $data.Keys | ForEach-Object {
     Set-ItemProperty -Path $registryPath -Name $_ -Value $data[$_]
