@@ -1,0 +1,8 @@
+7zip.7zip
+Adobe.Acrobat.Reader.64-bit
+BelgianGovernment.Belgium-eIDmiddleware
+Google.Chrome
+Google.GoogleDrive
+IrfanSkiljan.IrfanView
+Mozilla.Firefox
+VideoLAN.VLC
