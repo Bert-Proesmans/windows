@@ -7,22 +7,24 @@ CodeSector.TeraCopy
 CPUID.CPU-Z
 CPUID.HWMonitor
 CrystalDewWorld.CrystalDiskInfo
-flux.flux # User install, breaks install from another user but works on update
-Fork.Fork # User install, breaks install from another user but works on update
+flux.flux # User install update
+Fork.Fork # User install update
 Google.GoogleDrive
 gurnec.HashCheckShellExtension
-Gyan.FFmpeg # User install, breaks install from another user but works on update
+Gyan.FFmpeg # User install update
+Hashicorp.Vault # User install update
 IrfanSkiljan.IrfanView
 MHNexus.HxD
 Microsoft.OpenJDK.17
-Mikrotik.Winbox # User install, breaks install from another user but works on update
+Microsoft.OpenSSH.Beta
+Mikrotik.Winbox # User install update
 Mozilla.Firefox
 OBSProject.OBSStudio
 Python.Python.3.8
 qBittorrent.qBittorrent
 RamenSoftware.Windhawk
-Rustlang.Rustup # User install, breaks install from another user but works on update
-SumatraPDF.SumatraPDF # User install, breaks install from another user but works on update
+Rustlang.Rustup # User install update
+SumatraPDF.SumatraPDF # User install update
 tailscale.tailscale
 UderzoSoftware.SpaceSniffer
 Valve.Steam

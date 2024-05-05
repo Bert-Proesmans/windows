@@ -26,24 +26,18 @@ Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.Winget.Source_8weky
     "CPUID.CPU-Z"
     "CPUID.HWMonitor"
     "CrystalDewWorld.CrystalDiskInfo"
-    # "flux.flux" # User install, breaks install from another user but works on update
-    # "Fork.Fork" # User install, breaks install from another user but works on update
     "Google.GoogleDrive"
     "gurnec.HashCheckShellExtension"
-    # "Gyan.FFmpeg" # User install, breaks install from another user but works on update
     "IrfanSkiljan.IrfanView"
     "MHNexus.HxD"
     "Microsoft.OpenJDK.17"
-    # "Mikrotik.Winbox" # User install, breaks install from another user but works on update
+    "Microsoft.OpenSSH.Beta"
     "Mozilla.Firefox"
     "OBSProject.OBSStudio"
     "Python.Python.3.8"
     "qBittorrent.qBittorrent"
     "RamenSoftware.Windhawk"
-    # "Rustlang.Rustup" # User install, breaks install from another user but works on update
-    # "SumatraPDF.SumatraPDF" # User install, breaks install from another user but works on update
     "tailscale.tailscale"
-    "UderzoSoftware.SpaceSniffer"
     "Valve.Steam"
     "VideoLAN.VLC"
     "WiresharkFoundation.Wireshark"
@@ -56,9 +50,11 @@ Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.Winget.Source_8weky
     "flux.flux" 
     "Fork.Fork" 
     "Gyan.FFmpeg"
+    "Hashicorp.Vault"
     "Mikrotik.Winbox"
     "Rustlang.Rustup"
     "SumatraPDF.SumatraPDF"
+    "UderzoSoftware.SpaceSniffer"
 ) | ForEach-Object { winget.exe install --accept-source-agreements --accept-package-agreements --source winget --exact --id $_ }
 
 # Git needs to be installed manually because it doesn't want to elevate itself.
