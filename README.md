@@ -32,8 +32,8 @@ Manual steps.
 | set_groups.ps1 | Update the value of variable `$User` and the target groups. The script will add the user to each group. This is allows the non-administrator user to perform certain activities like Hyper-V VM management, and/or configure network settings.
 | winget_install.ps1 | Install software through winget to quickly get setup. The installers will elevate themselves.<br/>The script needs to run as the current user, or as a separate administrator user with manual installs of the per-user programs (see script content).
 | wau_whitelist.txt | Whitelisted apps that automatically update through the WingetAutoAupdate tool.
-| \*lightweight\* | Small list of applications usable by anyone, lower attack surface.
-| *.css | Files to fix Firefox' UI to accommodate my tabs setup.
+| \*lightweight\* | Smaller list of applications that have more broad usage. Useful for low-tech family members.
+| firefox\*.css | Files to fix Firefox' UI to accommodate my tabs setup.
 
 # Misc
 
