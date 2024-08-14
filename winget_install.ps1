@@ -68,7 +68,7 @@ winget.exe install --source winget --scope machine --exact --id Microsoft.Visual
 
 @(
     "9NBLGGH516XP" # Eartrumpet
-    "9P7KNL5RWT25" # Sysinternal
+    "9P7KNL5RWT25" # Sysinternal (zoomit)
     "9PLJWWSV01LK" # TwinkleTray
 ) | ForEach-Object { winget.exe install --accept-source-agreements --accept-package-agreements --source msstore --exact --id $_ }
 
