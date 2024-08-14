@@ -82,6 +82,7 @@ Manual steps.
 | emergency.ps1 | Windows activation stuff, also edition switching activation, re-arming volume licensing etc
 | set_acl.ps1 | The script updates the access control records of the library folders on another disk/partition. **Update the value of variable `$User` and the target paths.**
 | set_groups.ps1 | The script adds the user to certain groups for higher privileges. For example, the group "Hyper-V Administrators" allows non-admin users to control hyper-V virtual machines. **Update the value of variable `$User` and the target groups.**
+| set_system.ps1 | The script configures basic system behaviour. More info within the script file.
 | winget_install.ps1 | Install software through winget. The script needs to run as the everyday user, with administrator privileges (recommended). More info within script file.
 | wau_whitelist.txt | Whitelisted apps that automatically update through the WingetAutoAupdate tool.
 | \*lightweight\* | Smaller list of applications that have more broad usage. Useful for low-tech family members.
