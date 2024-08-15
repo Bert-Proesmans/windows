@@ -236,6 +236,9 @@ Draw shortcut is keys are [CONTROL]+[2].
     * Normalize brightness, equalize lightlevels for locking (see below)
 * Main flyout; Tick the chain to sync brightness levels between all monitors
 
+### EarTrumpet
+
+Nothing to configure, but EarTrumpet by default shows all enabled audio devices. You want to disable audio devices you do not use to remove them from the flyout window.
 
 # Misc
 
