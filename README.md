@@ -171,28 +171,25 @@ The following extensions aren't required anymore because they became Firefox nat
 
 ### Windhawk
 
+* Better file sizes in Explorer details
 * Middle click to close on taskbar
 * Show all apps by default in start menu
 * Taskbar labels for Windows 11
 * Taskbar thumbnail reorder
-* Windows 11 taskbar styler
+* Taskbar tray system icons tweaks
 
 ## Approaches and configurations
 
-### Windhawk - taskbar styler
+### Windhawk - Better file sizes in explorer
 
-One minor tweak to remove the second (default) sound icon so the taskbar looks more slick. The default icon has less functionality than EarTrumpet, so it's hidden.
+* Don't show folder sizes
+* Use MB/GB for larger sizes
+* Use IEC terms (KiB instead of KB)
 
-* Theme; None
-* Control Styles
+### Windhawk - taskbar tray system icons
 
-| Target | Styles | Description |
-|--- | --- | --- |
-| systemtray:OmniButton#ControlCenterButton > Grid > ContentPresenter > ItemsPresenter > StackPanel > ContentPresenter[2] > systemtray:IconView > Grid > Grid | Visibility=Collapsed | Hides the windows default sound icon. Functionally replaced by EarTrumpet
-
-```json
-{"controlStyles[0].target":"systemtray:OmniButton#ControlCenterButton > Grid > ContentPresenter > ItemsPresenter > StackPanel > ContentPresenter[2] > systemtray:IconView > Grid > Grid","controlStyles[0].styles[0]":"Visibility=Collapsed","resourceVariables[0].variableKey":"","resourceVariables[0].value":"","promptForExplorerRestart":1,"theme":""}
-```
+* Hide sound icon
+* Hide bell icon when there are no new notifications
 
 ### Windhawk - taskbar labels
 
