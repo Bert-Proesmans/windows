@@ -1,13 +1,8 @@
 /*
- CONFIG;
-    - Locate user profile folder
-        - about:profiles -> open roaming folder
-        - C:\Users\Bert\AppData\Roaming\Mozilla\Firefox\Profiles\*
-    - Create folder 'chrome'
-    - Copy file userChrome.css into 'chrome' folder
-        - C:\Users\Bert\AppData\Roaming\Mozilla\Firefox\Profiles\*\chrome\userChrome.css
-    - Enable legacy user modifications
-        - about:config -> toolkit.legacyUserProfileCustomizations.stylesheets = true
+    Style the browser window.
+    All components of the browser are HTML/CSS that can be styled, including the browser tabs bar.
+
+    See README.md
 */
 
 #tabbrowser-tabs {

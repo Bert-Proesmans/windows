@@ -6,9 +6,10 @@ Repository with scripts to get productive ASAP on Windows.
 
 ## Goals
 
-* Have an open windows local account
+* Have an open low privileged windows local account
 * Be able to do 99% of the everyday things without requiring admin privileges
 * Have a strong password on the administrator local account
+* Have latest software updates
 
 ## Clean desktop
 
@@ -28,7 +29,7 @@ When a file/project becomes stale I move the file/folder into the archive folder
 
 | ![windows desktop window](/assets/desktop.png) | 
 |:--:| 
-| *My serene windows desktop.* |
+| *My serene windows desktop. [Click for wallpaper source](https://twitter.com/inapple84/status/1472951312891650049)* |
 
 | ![toplevel music library with recently used data](/assets/toplevel%20music%20library.png) | 
 |:--:| 
@@ -55,9 +56,9 @@ See [Philosophy](#philosophy) for more explanation about software choices, their
 
 Manual steps.
 
+1. Download Windows 11 IoT LTSC
 1. Create installer with Rufus, add installer customizations
     1. Automatically create local admin account
-    1. Bypass TPM requirement
 1. Unplug network
 1. Launch installer
 1. Give entire SSD to install, let it rip
@@ -66,14 +67,20 @@ Manual steps.
 1. Create user account for everyday use
     1. give it admin privileges (for now)
     1. don't set a password
+    1. mark password as "never expire" !
 1. Logon to new user
 1. Relocate user libraries to other persisted disk
-    1. (manually) open each library (documents, music, videos, images) and point them to
-    the corresponding folders on the other disk
-1. Run all scripts as necessary (see .ps1 scripts)
-1. Plug network in
-1. Proceed to install and configure (see winget_install.ps1)
-1. Take away admin rights for everyday user account
+    1. (manually) open each library (documents, music, videos, images) and point them to the corresponding folders on the other disk
+1. TODO !! Setup locally managed [mobile device management (MDM)](https://github.com/Bert-Proesmans/simple_mdm)
+1. Plug in network
+1. Perform windows activation
+1. TO DEPRECATE !! Run scripts to configure computer (see .ps1 scripts)
+    * The point is to have a single configuration file that is enforced by the local MDM server
+1. Proceed to install and configure software/software updates (see winget_install.ps1)
+1. Remove Administrator group membership for everyday user account
+1. Apply windows updates
+1. Restart computer
+1. DONE
 
 ## Contents
 
@@ -147,8 +154,8 @@ But thankfully, 3rd party to the rescue which bring a file copy manager that wor
 * uBlock Origin
 * Tree Style Tab
 * OneTab
-* I still don't care about cookies
-* Exosia - The search engine
+* Consent-O-Matic
+    * ~~I still don't care about cookies~~
 * Modern for Hacker News
 
 I have the following installed but disabled until I need them;
@@ -160,6 +167,8 @@ I have the following installed but disabled until I need them;
 * cookies.txt
 * Video DownloadHelper
 * CSS Stacking Context inspector
+* Ecosia - The search engine
+    * I swapped back to google because the underlying engine of ecosia (mostly Bing) returned bad results very often
 
 The following extensions aren't required anymore because they became Firefox native! (Yippeeeee 🎉);
 
@@ -168,6 +177,33 @@ The following extensions aren't required anymore because they became Firefox nat
 * [SOON] Tree Style Tab (SOON ™️, at this rate maybe in 2 years**)
 
 ** WHY IS IT SO HARD TO JUST IMPLEMENT ONE OF THE MOST POPULAR EXTENSIONS (FOR LITERAL YEARS) IN A NATIVE WAY?
+
+#### Firefox sync
+
+Login to restore extensions, bookmarks, and settings.
+
+#### Firefox user chrome
+
+To remove the topbar, where the browser tabs are located, we have to style the browser windows (the "chrome").
+This method is marked as deprecated, but no alternative/better method is currently known.
+
+1. Locate user profile folder
+    - about:profiles -> open roaming folder
+    - C:\Users\Bert\AppData\Roaming\Mozilla\Firefox\Profiles\*
+1. Create folder 'chrome'
+1. Copy file userChrome.css into 'chrome' folder
+    - C:\Users\Bert\AppData\Roaming\Mozilla\Firefox\Profiles\*\chrome\userChrome.css
+1. Enable legacy user modifications
+    - about:config -> toolkit.legacyUserProfileCustomizations.stylesheets = true
+
+#### TreeStyleTab
+
+Go into settings and configure the extension like below;
+
+* Style contents for left side
+* Theme: Proton
+* Disable animation effects
+* Add firefox/treestyletab.css into Advanced > User style sheet
 
 ### Windhawk
 
