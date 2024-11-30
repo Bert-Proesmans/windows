@@ -1,8 +1,8 @@
 #Requires -RunAsAdministrator
 
 try {
-    Enable-WindowsOptionalFeature -FeatureName 'Microsoft-Hyper-V' -All -Online
-    Enable-WindowsOptionalFeature -FeatureName 'Containers-DisposableClientVM' -All -Online
+    Enable-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Hyper-V' -All
+    Enable-WindowsOptionalFeature -Online -FeatureName 'Containers-DisposableClientVM'
 } catch {
     Write-Error "Problem enabling optional features: $_"
     Write-Error 'Exiting..'
