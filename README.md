@@ -277,7 +277,7 @@ The important Edge settings are follows;
 The PWA's open links within the edge browser itself, which is foookin annoying because my tools and active sessions are in Firefox.
 Use the extension [Open In](https://microsoftedge.microsoft.com/addons/detail/open-in-firefox/ajgodcbbfnpdbopgmfcgdbfhabbnilbp), extension set by [Andy Portmen](https://webextension.org/listing/open-in.html), with a whitelist !! IN REVERSE MODE !! to open all external links with the default browser!
 
-* Open with leftclick; `discord.com, outlook.live.com, open.spotify.com`
+* Open with leftclick; `cdn.discordapp.com, discord.com, outlook.live.com, open.spotify.com`
 * Reverse mode \[ENABLED]
 * Path to executable; `C:\Program Files\Mozilla Firefox\firefox.exe`
 
