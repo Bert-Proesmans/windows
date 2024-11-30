@@ -17,7 +17,7 @@ $applications = @(
     @{ Name = "CrystalDewWorld.CrystalDiskInfo"; AutoUpdate = $true; Source = "winget"; },
     @{ Name = "flux.flux" ; AutoUpdate = $true; Source = "winget"; IsUserApp = $true; },
     @{ Name = "Fork.Fork" ; AutoUpdate = $false; Source = "winget"; IsUserApp = $true; },
-    @{ Name = "Git.Git"; AutoUpdate = $true; Source = "custom"; }
+    @{ Name = "Git.Git"; AutoUpdate = $true; Source = "winget"; }
     @{ Name = "Google.GoogleDrive"; AutoUpdate = $true; Source = "winget"; },
     @{ Name = "gurnec.HashCheckShellExtension"; AutoUpdate = $true; Source = "winget"; },
     @{ Name = "Gyan.FFmpeg"; AutoUpdate = $true; Source = "winget"; IsUserApp = $true; },
@@ -95,10 +95,6 @@ Write-Host '== Running system-context installers =='
 $applications `
 | Where-Object { ($_.Source -eq "winget") -and ($_.IsUserApp -ne $true) } `
 | ForEach-Object { Write-Host $_.Name; winget.exe install --accept-source-agreements --accept-package-agreements --source winget --exact --id $_.Name }
-
-Write-Host '== Custom install for Git =='
-winget.exe install --accept-source-agreements --accept-package-agreements --source winget --scope machine --exact --id 'Git.Git' `
-    --override '/DIR="C:\Program Files\Git" /ALLUSERS /COMPONENTS="gitlfs,scalar"'
 
 Write-Host '== Custom install for VSCode =='
 winget.exe install --accept-source-agreements --accept-package-agreements --source winget --scope machine --exact --id 'Microsoft.VisualStudioCode' `
