@@ -246,6 +246,44 @@ See also; [Windows container shortcuts](https://github.com/Bert-Proesmans/Window
 
 Best support is when the website publishes their own PWA manifest (basically an installation config file), but policies and manual "app creation" can be setup by using the above links.
 
+Use Edge as PWA platform, since Firefox doesn't support the "single-desktop app" that allows to pin web pages as their own window to start and taskbar.
+The important Edge settings are follows;
+
+* Profile preferences > 
+    * Automatic sign in on Microsoft Edge \[DISABLED]
+    * Allow single sign-on for work or school sites using this profile \[DISABLED]
+* Privacy, search, and services >
+    * Choose what to clear every time you close the browser >
+        * Browsing history \[ENABLED]
+        * Download history \[ENABLED]
+        * Cookies and other data \[ENABLED]
+            * Don't clear;
+                - https://discord.com
+                - https://login.live.com
+                - https://outlook.live.com
+                - https://open.spotify.com
+        * Passwords
+        * Auto-fill forms
+* Cookies and site permissions >
+    * Location \[BLOCKED]
+    * Notifications \[BLOCKED]
+* Extensions >
+    * Install UBlock Origin (fork by Nik Rolls)
+    * Prepare to install UBlock Origin Lite (original source by Raymond Hill) ??
+        * When manifest V3 goes in effect on Edge, this will be the alternative
+
+#### Opening links from PWA's
+
+The PWA's open links within the edge browser itself, which is foookin annoying because my tools and active sessions are in Firefox.
+Use the extension [Open In](https://microsoftedge.microsoft.com/addons/detail/open-in-firefox/ajgodcbbfnpdbopgmfcgdbfhabbnilbp), extension set by [Andy Portmen](https://webextension.org/listing/open-in.html), with a whitelist !! IN REVERSE MODE !! to open all external links with the default browser!
+
+* Open with leftclick; `discord.com, outlook.live.com, open.spotify.com`
+* Reverse mode \[ENABLED]
+* Path to executable; `C:\Program Files\Mozilla Firefox\firefox.exe`
+
+Also install, sadly, the native bridge application. This is a node app that executes commands from the extension. One of the commands is starting a new browser tab/window with the clicked link. This node app installs in %localappdata%, search by reference of `com.add0n.node`.
+
+
 ### Windhawk - Better file sizes in explorer
 
 * Don't show folder sizes
