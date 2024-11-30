@@ -72,13 +72,16 @@ Manual steps.
 1. Relocate user libraries to other persisted disk
     1. (manually) open each library (documents, music, videos, images) and point them to the corresponding folders on the other disk
 1. TODO !! Setup locally managed [mobile device management (MDM)](https://github.com/Bert-Proesmans/simple_mdm)
-1. Plug in network
-1. Perform windows activation
 1. TO DEPRECATE !! Run scripts to configure computer (see .ps1 scripts)
     * The point is to have a single configuration file that is enforced by the local MDM server
+1. Verify (and change) computer name
+1. Verify (and change) logical drive letters
+1. Restart if necessary
+1. Plug in network
+1. Perform windows activation
 1. Proceed to install and configure software/software updates (see winget_install.ps1)
 1. Remove Administrator group membership for everyday user account
-1. Apply windows updates
+1. Apply windows updates (if any)
 1. Restart computer
 1. DONE
 
@@ -102,9 +105,9 @@ Manual steps.
 
 ### Twinkle Tray
 
-My monitors are kept at reduced brightness all the time. I started doing this to keep the transmitted light balanced against the ambient lighting. At my desk I'm facing an outside window so my monitor never outshines the incoming atmospheric light. This has a downside that, depending on my activity (gaming, watching films, color sensitive work), the monitor needs to be brighter.
+My monitors are kept at reduced brightness all the time. I started doing this to keep the transmitted light balanced against the ambient lighting. At my desk I'm facing an outside window so my monitor never outshines the incoming atmospheric light. This has a downside that, depending on my activity (gaming, watching films, color sensitive work), the monitor output needs to be brighter.
 
-I had probably changed the brightness manually a thousand times before I started realizing that this HAD to be controllable from software, enter Twinkle Tray!
+I had probably changed the brightness manually a thousand times before I figured action HAD to be controllable from software, enter Twinkle Tray!
 
 | ![Twinkle Tray look and feel demo](https://raw.githubusercontent.com/xanderfrangos/twinkle-tray/gh-pages/assets/img/tt-comparison.jpg) | 
 |:--:| 
@@ -113,7 +116,7 @@ I had probably changed the brightness manually a thousand times before I started
 ### F.Lux
 
 F.Lux has been installed on my computers since (probably) 2010. All this time I have a permanent tint on my monitors that filter blue light. It's awesome software, literally set-and-forget forever!  
-Research coming out since 2018 claims that blue light filters doesn't improve sleep. I'm used to it now, and I do think the automations help me tremendously as part of the ritual before going to bed.
+Research coming out since 2018 claims that blue light filters doesn't improve sleep. I'm used to the color shift now, and the automations help me as part of the ritual before going to bed, so I kept using the software.
 
 ### ZoomIt
 
@@ -216,6 +219,21 @@ Go into settings and configure the extension like below;
 * Taskbar tray system icons tweaks
 
 ## Approaches and configurations
+
+### Windows
+
+#### Hyper-V
+
+Integrated platform for managing and running virtual machines. I do a bunch of development in and for linux so having a VM ready is nice!
+
+See also; [Nix configuration](https://github.com/Bert-Proesmans/nix)
+
+#### Windows containers
+
+Quickly open up a "clean" windows installation for idempotency testing or isolating some quirky code and application behaviour.
+Works amazing with custom shortcuts that facilitate data sharing between host and container(-vm).
+
+See also; [Windows container shortcuts](https://github.com/Bert-Proesmans/WindowsSandboxShortcuts)
 
 ### Progressive Web Applications (PWA's)
 
