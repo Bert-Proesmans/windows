@@ -1,9 +1,23 @@
-#Requires -RunAsAdministrator
-
 # This script DOES NOT REQUIRE a functional windows app store as precondition!
 #
 # Winget can fully replace the windows store app as another (CLI) frontend, but the UI could be useful.
 # If there is no store app (in IoT releases for example) or it's broken, run reset_windows_appstore.ps1 first!
+
+$processUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
+$sessionUser = (Get-WmiObject -Query 'SELECT UserName FROM Win32_ComputerSystem').UserName
+
+if (<# Session could be empty/null in sandbox #> `
+    ($null -ne $sessionUser) `
+    -and ($processUser -ne $sessionUser) `
+) {
+    Write-Host ("**WARNING*; The user owning the current process is _NOT_ the logon session user." +
+    " This discrepancy will cause WinRT to not work! Specifically updating of windows store applications will fail." +
+    " No administrator permissions are required to update the winget package. Run this program again as the user owning the current desktop session." +
+    " But administrator permissions are required to install and reset the winget package index cache. In that case make the user owning" +
+    " the desktop session a temporary administrator and run this script again.")
+    Write-Host "Press enter to continue..."
+    Read-Host
+}
 
 <#
 .SYNOPSIS
@@ -85,15 +99,13 @@ try
         throw 'This script has problems in pwsh on some platforms; please run it with legacy Windows PowerShell (5.1) (powershell.exe).'
     }
 
-    $processUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
-    $sessionUser = (Get-WmiObject -Query 'SELECT UserName FROM Win32_ComputerSystem').UserName
-
     if (<# Session could be empty/null in sandbox #> `
         ($null -ne $sessionUser) `
         -and ($processUser -ne $sessionUser) `
     )
     {
-        throw 'Due to WinRT limitations, this script must run as the same user that created this logon session; please make the current user administrator and run this script again.'
+        # This exception will be caught below to skip updating the windows store application. This is intentional.
+        throw 'Due to WinRT limitations, this script must run as the same user that created this logon session; please run this script as the user owning the current desktop session.'
     }
 
     # https://fleexlab.blogspot.com/2018/02/using-winrts-iasyncoperation-in.html
