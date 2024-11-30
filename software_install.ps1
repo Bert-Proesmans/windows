@@ -3,6 +3,7 @@
 
 $applications = @(
     @{ Name = "7zip.7zip"; AutoUpdate = $true; Source = "winget"; },
+    @{ Name = "9N0DX20HK701"; AutoUpdate = $true; Source = "msstore"; }, # Windows Terminal
     @{ Name = "9NBLGGH516XP"; AutoUpdate = $true; Source = "msstore"; }, # Eartrumpet
     @{ Name = "9P7KNL5RWT25"; AutoUpdate = $true; Source = "msstore"; }, # Sysinternal (zoomit)
     @{ Name = "9PLJWWSV01LK"; AutoUpdate = $true; Source = "msstore"; }, # TwinkleTray
