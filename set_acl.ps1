@@ -38,7 +38,8 @@ $SubDirACL.SetAccessRuleProtection($false, $true) # ENABLE inheritance
 $SubDirACL.SetOwner([System.Security.Principal.NTAccount]"$ComputerName\$User")
 
 $Targets | `
-    Foreach-Object {Get-ChildItem -Path $_ -Recurse -Directory} | `
+    <# Force on Get-ChildItem will also return hidden files #>
+    Foreach-Object {Get-ChildItem -Path $_ -Recurse -Directory -Force} | `
     Foreach-Object {Set-ACL -Path $_.FullName -AclObject $SubDirACL}
 
 # Set Access Control List (ACL) rules on the Public Desktop (aka the desktop shared between all users)
