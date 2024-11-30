@@ -1,8 +1,75 @@
 #Requires -RunAsAdministrator
 
-# This script requires a functional windows app store as precondition!
+# This script DOES NOT REQUIRE a functional windows app store as precondition!
 #
-# If there is no store (IoT release) or it's broken, run reset_windows_appstore.ps1 first!
+# Winget can fully replace the windows store app as another (CLI) frontend, but the UI could be useful.
+# If there is no store app (in IoT releases for example) or it's broken, run reset_windows_appstore.ps1 first!
+
+<#
+.SYNOPSIS
+    On Windows 11 I expect winget to be already installed. If not, install directly from the released packages.
+#>
+$hasPackageManager = Get-AppPackage -name 'Microsoft.DesktopAppInstaller'
+if (!$hasPackageManager -or [version]$hasPackageManager.Version -lt [version]'1.10.0.0') {
+    try {
+        # We need a temporary directory to handle all winget dependencies at once and license install
+        $tempDir = Join-Path $([System.IO.Path]::GetTempPath()) 'winget_install'
+
+        if (Test-Path -Path $tempDir) {
+            $response = Read-Host "The temporary directory already exists. Do you want to remove it? (y/N)"
+            if ($response -eq "Y" -or $response -eq "y") {
+                Write-Host 'Cleaning existing temporary directory'
+                Remove-Item -Path $tempDir -Recurse -Force -ErrorAction SilentlyContinue
+            } else {
+                Write-Host "Keeping the temporary directory. Existing contents may affect the script."
+            }
+        }
+        
+        if (-not (Test-Path -Path $tempDir)) {
+            Write-Host 'Creating temporary directory'
+            New-Item -ItemType Directory -Path $tempDir | Out-Null
+        }
+
+        Write-Host 'Downloading resources'
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        $releases = Invoke-RestMethod -uri 'https://api.github.com/repos/microsoft/winget-cli/releases/latest'
+
+        $MSIXLatest = Join-Path $tempDir 'winget.msixbundle'
+        if (-not (Test-Path -Path $MSIXLatest)) {
+            Invoke-WebRequest -OutFile $MSIXLatest -Uri $($releases.assets | Where { $_.browser_download_url.EndsWith('.msixbundle') } | Select -First 1 -ExpandProperty browser_download_url)
+        }
+        $licenseLatest = Join-Path $tempDir 'license.xml'
+        if (-not (Test-Path -Path $licenseLatest)) {
+            Invoke-WebRequest -OutFile $licenseLatest -Uri $($releases.assets | Where { $_.browser_download_url.EndsWith('License1.xml') } | Select -First 1 -ExpandProperty browser_download_url)
+        }
+        $dependenciesLatest = Join-Path $tempDir 'dependencies.zip'
+        if (-not (Test-Path -Path $dependenciesLatest)) {
+            Invoke-WebRequest -OutFile $dependenciesLatest -Uri $($releases.assets | Where { $_.browser_download_url.EndsWith('Dependencies.zip') } | Select -First 1 -ExpandProperty browser_download_url)
+        }
+
+        Write-Host 'Installing winget Dependencies'
+        Expand-Archive -Path $dependenciesLatest -DestinationPath $tempDir -Force
+        $dependenciesUnpacked = Join-Path $tempDir 'x64' # WARN; Subdirectory for architecture!
+        Get-ChildItem -Path $dependenciesUnpacked -Filter *.appx | Select -ExpandProperty FullName | Add-AppxPackage
+
+
+        Write-Host 'Installing winget'
+        Add-AppxPackage -Path $MSIXLatest
+
+        Write-Host 'Installing winget license'
+        Add-AppxProvisionedPackage -Online -PackagePath $MSIXLatest -LicensePath $licenseLatest
+
+        Write-Host 'Finished installing winget'
+    }
+    catch {
+        Write-Error "Problem installing winget package: $_"
+        Write-Error 'Exiting..'
+        exit 1
+    }
+}
+else {
+    Write-Host 'winget already installed'
+}
 
 <#
 .SYNOPSIS
@@ -15,15 +82,18 @@ try
 {
     if ($PSVersionTable.PSVersion.Major -ne 5)
     {
-        throw "This script has problems in pwsh on some platforms; please run it with legacy Windows PowerShell (5.1) (powershell.exe)."
+        throw 'This script has problems in pwsh on some platforms; please run it with legacy Windows PowerShell (5.1) (powershell.exe).'
     }
 
     $processUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
-    $sessionUser = (Get-WmiObject -Query "SELECT UserName FROM Win32_ComputerSystem").UserName
+    $sessionUser = (Get-WmiObject -Query 'SELECT UserName FROM Win32_ComputerSystem').UserName
 
-    if ($processUser -ne $sessionUser)
+    if (<# Session could be empty/null in sandbox #> `
+        ($null -ne $sessionUser) `
+        -and ($processUser -ne $sessionUser) `
+    )
     {
-        throw "Due to WinRT limitations, this script must run as the same user that created this logon session; please make the current user administrator and run this script again."
+        throw 'Due to WinRT limitations, this script must run as the same user that created this logon session; please make the current user administrator and run this script again.'
     }
 
     # https://fleexlab.blogspot.com/2018/02/using-winrts-iasyncoperation-in.html
@@ -38,15 +108,15 @@ try
 
     # https://docs.microsoft.com/uwp/api/windows.applicationmodel.store.preview.installcontrol.appinstallmanager?view=winrt-22000
     # We need to tell PowerShell about this WinRT API before we can call it...
-    Write-Host "Enabling Windows.ApplicationModel.Store.Preview.InstallControl.AppInstallManager WinRT type"
+    Write-Host 'Enabling Windows.ApplicationModel.Store.Preview.InstallControl.AppInstallManager WinRT type'
     [Windows.ApplicationModel.Store.Preview.InstallControl.AppInstallManager,Windows.ApplicationModel.Store.Preview,ContentType=WindowsRuntime] | Out-Null
     $appManager = New-Object -TypeName Windows.ApplicationModel.Store.Preview.InstallControl.AppInstallManager
 
     # Customize this list of apps to suit... the key one for making sure that winget.exe is
     # installed is the DesktopAppInstaller one.
     $appsToUpdate = @(
-        "Microsoft.WindowsStore_8wekyb3d8bbwe",
-        "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe"  # <-- winget comes from this one
+        'Microsoft.WindowsStore_8wekyb3d8bbwe',
+        'Microsoft.DesktopAppInstaller_8wekyb3d8bbwe'  # <-- winget comes from this one
     )
 
     foreach ($app in $appsToUpdate)
@@ -60,13 +130,13 @@ try
             {
                 if ($null -eq $updateResult)
                 {
-                    Write-Host "Update is null. It must already be completed (or there was no update)..."
+                    Write-Host 'Update is null. It must already be completed (or there was no update)...'
                     break
                 }
 
                 if ($null -eq $updateResult.GetCurrentStatus())
                 {
-                    Write-Host "Current status is null. WAT"
+                    Write-Host 'Current status is null. WAT'
                     break
                 }
 
@@ -88,7 +158,7 @@ try
             # I'm happy to just let this slide for now.
             $problem = $_.Exception.InnerException # we'll just take the first one
             Write-Host "Error updating app $app : $problem"
-            Write-Host "(this is expected if the app is not installed; you can probably ignore this)"
+            Write-Host '(this is expected if the app is not installed; you can probably ignore this)'
         }
         catch
         {
@@ -96,12 +166,12 @@ try
         }
     }
 
-    Write-Host "Store updates completed"
+    Write-Host 'Store updates completed'
 }
 catch
 {
     Write-Error "Problem updating store apps: $_"
-    Write-Error "Exiting.."
+    Write-Error 'Exiting..'
     exit 1
 }
 
@@ -110,13 +180,13 @@ catch
     Ensure the winget package is available in our user session.
     This contains (recursively) applying proper permissions to the (shared) package cache, linking package matrix, and making binaries available on PATH.
 #>
-if (!(Get-Command "winget" -ErrorAction SilentlyContinue)) {
-    Write-Output "winget is not on the PATH. Forcing synchronous package install."
+if (!(Get-Command 'winget' -ErrorAction SilentlyContinue)) {
+    Write-Output 'winget is not on the PATH. Forcing synchronous package install.'
     # Synchronously wait for the windows app store to finish preparation of this package for the current user
     Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe
 
-    if (!(Get-Command "winget" -ErrorAction SilentlyContinue)) {
-        Write-Error "Adding winget to the PATH failed. This requires a manual fix. Exiting.."
+    if (!(Get-Command 'winget' -ErrorAction SilentlyContinue)) {
+        Write-Error 'Adding winget to the PATH failed. This requires a manual fix. Exiting..'
         exit 1
     }
 }

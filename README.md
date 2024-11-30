@@ -90,9 +90,10 @@ Manual steps.
 | set_acl.ps1 | The script updates the access control records of the library folders on another disk/partition. **Update the value of variable `$User` and the target paths.**
 | set_groups.ps1 | The script adds the user to certain groups for higher privileges. For example, the group "Hyper-V Administrators" allows non-admin users to control hyper-V virtual machines. **Update the value of variable `$User` and the target groups.**
 | set_system.ps1 | The script configures basic system behaviour. More info within the script file.
-| winget_install.ps1 | Install software through winget. The script needs to run as the everyday user, with administrator privileges (recommended). More info within script file.
-| wau_whitelist.txt | Whitelisted apps that automatically update through the WingetAutoAupdate tool.
-| \*lightweight\* | Smaller list of applications that have more broad usage. Useful for low-tech family members.
+| set_features.ps1 | The script configures windows optional features. More info within the script file.
+| windows_appstore_reset.ps | The script performs a cleanup and reset of the windows app store. Useful when your windows channel has no app store application or a broken application.
+| winget_install.ps | Installs and updates winget so it's setup and ready as a storefront for the windows app store and the winget package index. The script needs to run with administrator privileges (recommended) to install winget and reset the winget index sources.
+| software_install.ps1 | Install software through winget. The script needs to run as the everyday user, with administrator privileges (recommended). More info within script file.
 | firefox\*.css | Files to fix Firefox' UI to accommodate my tabs setup.
 
 # Philosophy
@@ -215,6 +216,17 @@ Go into settings and configure the extension like below;
 * Taskbar tray system icons tweaks
 
 ## Approaches and configurations
+
+### Progressive Web Applications (PWA's)
+
+* Discord
+    * https://discord.com/
+* Outlook live mail
+    * https://outlook.live.com/mail/
+* Spotify
+    * https://open.spotify.com/
+
+Best support is when the website publishes their own PWA manifest (basically an installation config file), but policies and manual "app creation" can be setup by using the above links.
 
 ### Windhawk - Better file sizes in explorer
 
