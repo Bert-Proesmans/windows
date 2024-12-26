@@ -62,7 +62,8 @@ if (!(Test-Path $registryPath)) {
 # dropped, update this list without additional blockers.
 # Non-elevated users cannot install software, so there is no security risk. This is a feature!
 $wauStatePath = Join-Path $([Environment]::GetFolderPath('CommonApplicationData')) 'WAU_data'
-$wauAppWhitelistPath = Join-Path $wauStatePath 'app_whitelist.txt'
+# ERROR; The filename is hardcoded into WAU and must match "included_apps.txt" !
+$wauAppWhitelistPath = Join-Path $wauStatePath 'included_apps.txt'
 
 if(-not (Test-Path -Path $wauStatePath)) {
     Write-Host "Creating folder for Winget Auto Updater configuration"
@@ -75,8 +76,9 @@ $data = @{
     "WAU_ActivateGPOManagement" = 1
     "WAU_DisableAutoUpdate" = 0
     "WAU_UseWhiteList" = 1
-    # MUST BE a folder path!
-    "WAU_ListPath" = $wauAppWhitelistPath
+    # ERROR; WAU has hardcoded requirement to be provided a directory path, where it will find
+    # the file "included_apps.txt" inside by itself !
+    "WAU_ListPath" = $wauStatePath
     "WAU_UpdatesInterval" = "Daily"
     "WAU_StartMenuShortcut" = 1
     "WAU_DesktopShortcut" = 0
