@@ -16,6 +16,7 @@ $applications = @(
     @{ Name = "CPUID.CPU-Z"; AutoUpdate = $true; Source = "winget"; },
     @{ Name = "CPUID.HWMonitor"; AutoUpdate = $true; Source = "winget"; },
     @{ Name = "CrystalDewWorld.CrystalDiskInfo"; AutoUpdate = $true; Source = "winget"; },
+    @{ Name = "DBBrowserForSQLite.DBBrowserForSQLite"; AutoUpdate = $true; Source = "winget"; },
     @{ Name = "flux.flux" ; AutoUpdate = $true; Source = "winget"; IsUserApp = $true; },
     @{ Name = "Fork.Fork" ; AutoUpdate = $false; Source = "winget"; IsUserApp = $true; },
     @{ Name = "Git.Git"; AutoUpdate = $true; Source = "winget"; }
