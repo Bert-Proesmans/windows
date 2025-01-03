@@ -7,6 +7,7 @@ $applications = @(
     @{ Name = "9NBLGGH516XP"; AutoUpdate = $true; Source = "msstore"; }, # Eartrumpet
     @{ Name = "9P7KNL5RWT25"; AutoUpdate = $true; Source = "msstore"; }, # Sysinternal (zoomit)
     @{ Name = "9PLJWWSV01LK"; AutoUpdate = $true; Source = "msstore"; }, # TwinkleTray
+    @{ Name = "XP89DCGQ3K6VLD"; AutoUpdate = $true; Source = "msstore"; }, # PowerToys
     @{ Name = "Almico.SpeedFan"; AutoUpdate = $true; Source = "winget"; },
     @{ Name = "Audacity.Audacity"; AutoUpdate = $true; Source = "winget"; },
     @{ Name = "BelgianGovernment.Belgium-eIDmiddleware"; AutoUpdate = $true; Source = "winget"; },
