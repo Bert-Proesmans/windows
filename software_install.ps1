@@ -26,7 +26,7 @@ $applications = @(
     @{ Name = "Gyan.FFmpeg"; AutoUpdate = $true; Source = "winget"; IsUserApp = $true; },
     @{ Name = "IrfanSkiljan.IrfanView"; AutoUpdate = $true; Source = "winget"; },
     @{ Name = "MHNexus.HxD"; AutoUpdate = $true; Source = "winget"; },
-    @{ Name = "Microsoft.OpenJDK.17"; AutoUpdate = $true; Source = "winget"; },
+    @{ Name = "Microsoft.OpenJDK.21"; AutoUpdate = $true; Source = "winget"; },
     @{ Name = "Microsoft.OpenSSH.Beta"; AutoUpdate = $true; Source = "winget"; },
     @{ Name = "Microsoft.VisualStudio.2022.Community"; AutoUpdate = $false; Source = "custom"; },
     @{ Name = "Microsoft.VisualStudioCode"; AutoUpdate = $true; Source = "custom"; }
