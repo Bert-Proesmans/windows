@@ -1,3 +1,8 @@
+Write-Host "WARNING; Remote desktop (with local accounts) is finnicky as hell. I cannot get this to work stably"
+Write-Host "I suggest other solutions like Parsec and TeamViewer, which work automatically. Or try linux!"
+Read-Host -Prompt "Press enter to continue"
+
+
 $ScriptContainerPath = Join-Path $([Environment]::GetFolderPath('CommonApplicationData')) -ChildPath 'proesmans'
 $ToggleScriptPath = $ScriptContainerPath | Join-Path -ChildPath 'toggle_rdp.ps1'
 
@@ -5,6 +10,11 @@ if(-not (Test-Path -Path $ScriptContainerPath)) {
     Write-Host 'Creating folder for Proesmans scripts'
     New-Item -ItemType Directory -Path $ScriptContainerPath | Out-Null
 }
+
+# Ensure Remote Desktop service runs inside its own service host process
+#
+# Undo with; sc config "TermService" type= share
+sc config "TermService" type= own
 
 Copy-Item "$($PSScriptRoot)\rdp\toggle_rdp.ps1" "$ToggleScriptPath"
 
@@ -43,3 +53,4 @@ Write-Host "Start secpol.msc and remove the group `"Administrators`" from the po
 # This is not recommended, but I like having my no-privilege account without a password. There are lots of software that want to run 
 # with unlocked permissions and typing a password is annoying.
 Write-Host "Start secpol.msc and disable login limitations on passwordless accounts in the policy at path Local Policies > Security Options : Accounts: Limit local account use of blank passwords to console logon only"
+Write-Host "WARNING; Windows will reset these security settings on occasion! Your RDP client can suddenly stop connecting to the server."
