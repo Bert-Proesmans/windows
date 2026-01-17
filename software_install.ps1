@@ -43,6 +43,7 @@ $applications = @(
     @{ Name = "UderzoSoftware.SpaceSniffer"; AutoUpdate = $true; Source = "winget"; IsUserApp = $true; },
     @{ Name = "Valve.Steam"; AutoUpdate = $true; Source = "winget"; },
     @{ Name = "VideoLAN.VLC"; AutoUpdate = $true; Source = "winget"; },
+    @{ Name = "WinSCP.WinSCP"; AutoUpdate = $true; Source = "winget"; },
     @{ Name = "WiresharkFoundation.Wireshark"; AutoUpdate = $true; Source = "winget"; },
     @{ Name = "Yubico.YubikeyManager"; AutoUpdate = $true; Source = "winget"; }
     # ERROR; Last record should not end with a comma!
