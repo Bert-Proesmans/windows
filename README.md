@@ -101,6 +101,98 @@ Manual steps.
 
 # Philosophy
 
+## Single desktop workspace
+
+I'm using a single computer monitor, but for no special reason (anymore). As of april 2026 it's been about two years since I got rid of my secondary monitor on my desk. The dedication that made me just do it™️ did result in a productivity boost which could be wrongly attributed to the effect of only having to focus on a single monitor (and the reduced virtual desktop area). By now this effect is gone.  
+With two monitors at work, and a single one at home, I can convincingly say that my productivity is not (meaningfully) influenced by the amount of monitors I have. And continuing making bold claims, a larger usable virtual desktop space also does not (meaningfully) influence my productivity!
+
+I've recently acquired a good deal on the Xiaomi G27 Pro, which has been talked about a lot in the communities that worship good image quality. It's a microLED monitor with good coverage of the extended color spectrum, but in my opinion it doesn't come well calibrated out of the factory (at least my unit). Together with the complicated mess that is Windows, Windows color profiles, hardware communications, built-in firmware issues, and Windows HDR, I would not recommend this monitor to anyone unless they know what they're doing.  
+My general recommendation would be to buy an OLED monitor that is well received by independent testers (like RTINGS).
+
+However, this monitor _is_ very capable in my hands (which should also be capable), and I took some time to configure it to my liking! The information below is my own summary of information spread on the internet, likely not expert-level to be generalizable, and applies to my own unit/situation (but yours could be very similar).
+
+> [!CAUTION]  
+> REF; https://github.com/xanderfrangos/twinkle-tray/discussions/1204  
+> The Xiaomi G27 Pro monitor does not like to be tickled through software (DDC/CI). This issue is permanent because there is no (easy) way to upgrade its firmware, which is _the biggest_ downside of this monitor. All other issues could be solved one way or another if this monitor _just accepted firmware updates_!
+
+Manual configuration on the Xiaomu G27 Pro, start from factory reset settings;
+
+* Picture mode > Select mode = Movie
+* Picture mode > Contrast = 11
+* Picture mode > Color temperature = Custom
+* Picture mode > Saturation = 45
+* Picture mode > Gamma = 2.2
+* Picture mode > Color space = Native
+* Advanced > HDR = Auto
+* Advanced > Local dimming = Off \*\*
+* System > Backstrip lighting = On
+* System > Backstrip lighting > Light effects = Breathing
+* System > Backstrip lighting > Default color = \[Red]
+
+Software configuration;
+
+```text
+; HDRTray-Colorprofile settings
+
+[Monitor]
+DisplayId=1
+[Profiles]
+EnableColorManagement=1
+SDRProfile=Xiaomi 27i Pro_Rtings.icm
+HDRCalibration=xiaomi_miniled_1d.cal
+EnableSDRProfile=1
+EnableHDRProfile=1
+EnableColorPresetChange=1
+[SDR]
+Brightness=25
+RedGain=45
+GreenGain=51
+BlueGain=53
+[HDR]
+Brightness=100
+RedGain=45
+GreenGain=51
+BlueGain=53
+ColorPreset=12
+```
+
+The above configuration is given to the software [HDRTray-Colorprofile](https://github.com/mattiaburati/HDRTray-ColorProfile). The purpose of this software is to switch between Standard (Colour) Range (SDR) mode High Dynamic (Colour) Range (HDR) mode with a single click. \*\*  
+The software, with all companion files, is packaged at [assets/HDRTray-ColorProfile.zip](/assets/HDRTray-ColorProfile.zip). Unpack it to a non-changing path, like in your documents folder, and make the software auto-start after windows login.
+
+> [!NOTE]  
+> \*\* Switching to HDR is completed _after_ manually changing monitor setting 'Advanced > Local Dimming' to 'High'.  
+> Switching back to SDR is completed after manually setting Local Dimming back to 'Off'.  
+> I have not had the patience to verify if the monitor accepts an instruction to change local dimming mode. If anyone found out, please let me know :)
+
+I'm not using the `xiaomi_miniled_1d.cal` file while switching to HDR, the settings refer to a nonexistent path because the calibration filename is suffixed with `.bak`.  
+Instead I created an adjusted mapping curve `srgb_to_gamma2p2_200_1000nit.icm` (original from [win11hdr-srgb-to-gamma2.2-icm](https://github.com/dylanraga/win11hdr-srgb-to-gamma2.2-icm)) that needs to be applied directly into the Windows Colour Management tool (colorcpl.exe) for HDR mode.
+
+
+| ![Color Management control panel](/assets/colorcpl.png) | 
+|:--:| 
+| *Color Management control window, with colour profiles applied for SDR and HDR.* |
+
+
+### F.lux
+
+F.lux adjusts the colour calibration matrix at the video card level. The software should recognize HDR mode switching and apply its color temperature adjustments at the end of all changes (on top of the active icm file). The only thing to pay attention to is to make sure HDRTray starts before F.lux does, the rest is up to eventual consistency. When you need to force correct calibration mapping; disable F.lux, toggle HDRTray, re-enable F.lux.
+
+### Firefox
+
+Since ~march 2026 Firefox started integrating with Windows HDR. In short, this whole HDR topic is a can of worms, and I've already experienced that images look "washed" (desaturated + overexposed) **in SDR mode**! Chromium/Edge do already integrate with Windows HDR and seems to work as expected (from my limited testing)  
+This washed-effect is fixed using the following procedure;
+
+1. Open Firefox
+1. Navigate to `about:config`
+1. Search for setting `gfx.color_management.native_srgb`
+1. Set setting to `true`
+1. Restart Firefox
+
+### Twinkle Tray
+
+Twinkle Tray doesn't properly work with the Xiaomi G27 Pro. Expect the brightness slider to work 10% of the time, success is related to recent monitor commands sent by the computer.  
+The cause of this issue is the monitor not responding well to configuration commands, read the CAUTION note above.
+
 ## Installed applications
 
 ### Twinkle Tray
