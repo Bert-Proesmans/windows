@@ -107,15 +107,15 @@ Manual steps.
 
 My monitors are kept at reduced brightness all the time. I started doing this to keep the transmitted light balanced against the ambient lighting. At my desk I'm facing an outside window so my monitor never outshines the incoming atmospheric light. This has a downside that, depending on my activity (gaming, watching films, color sensitive work), the monitor output needs to be brighter.
 
-I had probably changed the brightness manually a thousand times before I figured action HAD to be controllable from software, enter Twinkle Tray!
+I had probably changed the brightness manually a thousand times before I figured this manual action HAD to be controllable from software, enter Twinkle Tray!
 
 | ![Twinkle Tray look and feel demo](https://raw.githubusercontent.com/xanderfrangos/twinkle-tray/gh-pages/assets/img/tt-comparison.jpg) | 
 |:--:| 
 | *Twinkle Tray doesn't like to be screenshotted, so here is the look and feel demo from their code repository.* |
 
-### F.Lux
+### F.lux
 
-F.Lux has been installed on my computers since (probably) 2010. All this time I have a permanent tint on my monitors that filter blue light. It's awesome software, literally set-and-forget forever!  
+F.lux has been installed on my computers since (probably) 2010. All this time I have a permanent tint on my monitors that filter blue light. It's awesome software, literally set-and-forget forever!  
 Research coming out since 2018 claims that blue light filters doesn't improve sleep. I'm used to the color shift now, and the automations help me as part of the ritual before going to bed, so I kept using the software.
 
 ### ZoomIt
@@ -321,7 +321,7 @@ The icon can be displayed (or use the keyboard shortcuts) to quickly enable/disa
 
 | ![Flux temperature settings](/assets/flux%20settings.png) | 
 |:--:| 
-| *Personal color temperature settings within the F.Lux program.* |
+| *Personal color temperature settings within the F.lux program.* |
 
 ### Zoomit
 
