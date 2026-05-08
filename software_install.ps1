@@ -8,6 +8,9 @@ $applications = @(
     @{ Name = "9P7KNL5RWT25"; AutoUpdate = $true; Source = "msstore"; }, # Sysinternal (zoomit)
     @{ Name = "9PLJWWSV01LK"; AutoUpdate = $true; Source = "msstore"; }, # TwinkleTray
     @{ Name = "XP89DCGQ3K6VLD"; AutoUpdate = $true; Source = "msstore"; }, # PowerToys
+    # @{ Name = "9N4WGH0Z6VHQ"; AutoUpdate = $true; Source = "msstore"; }, # HEVC Video Extensions from Device Manufacturer
+    @{ Name = "9PMMSR1CGPWG"; AutoUpdate = $true; Source = "msstore"; }, # HEIF Image Extension
+    @{ Name = "9MVZQVXJBQ9V"; AutoUpdate = $true; Source = "msstore"; }, # AV1 Video Extension
     @{ Name = "Almico.SpeedFan"; AutoUpdate = $true; Source = "winget"; },
     @{ Name = "Audacity.Audacity"; AutoUpdate = $true; Source = "winget"; },
     @{ Name = "BelgianGovernment.Belgium-eIDmiddleware"; AutoUpdate = $true; Source = "winget"; },
@@ -130,6 +133,8 @@ $applications `
 | ForEach-Object { Write-Host $_.Name; winget.exe install --accept-source-agreements --accept-package-agreements --source winget --exact --id $_.Name }
 
 Write-Host '== Installing applications from Windows app store =='
+Add-AppxPackage -Path '.\assets\9N4WGH0Z6VHQ.AppxBundle'
+
 $applications `
 | Where-Object { $_.Source -eq "msstore" } `
 | ForEach-Object { Write-Host $_.Name; winget.exe install --accept-source-agreements --accept-package-agreements --source msstore --exact --id $_.Name }
